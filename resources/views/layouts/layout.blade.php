@@ -7,6 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <script src="{{ asset("/vendor/js/jquery/jquery.js") }}"></script>
         <script src="{{ asset("/vendor/js/bootstrap/bootstrap.bundle.min.js") }}"></script>
+        <script src="{{asset('vendor/js/modal.js')}}"></script>
         <link href="{{ asset("/vendor/css/bootstrap/bootstrap.min.css") }}" rel="stylesheet">
         <link href="{{ asset("/vendor/fa/css/fontawesome.css") }}" rel="stylesheet">
         <link href="{{ asset("/vendor/fa/css/all.css")}}" rel="stylesheet">
@@ -33,6 +34,9 @@
                 @yield('page')
             </div>
         </div>
+        <div id="error" class="alert alert-danger" role="alert"></div>
+        <div id="success" class="alert alert-success" role="alert"></div>
+        <div id="modal"></div>
     </body>
 </html>
 

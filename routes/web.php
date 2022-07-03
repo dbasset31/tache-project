@@ -25,7 +25,9 @@ Route::middleware('guest')->group(function() {
     Route::get('/connexion', function () {
         return view('users/connexion');
     })->name('login');
+    Route::post('/connexion', [UserController::class, 'login'])->name('tryConnect');
 
     Route::get('/inscription', [UserController::class, 'formRegister'])->name('register');
+    Route::post('/inscription', [UserController::class, 'saveRegister'])->name('saveRegister');
 });
 

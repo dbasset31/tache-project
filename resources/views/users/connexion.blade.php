@@ -15,7 +15,8 @@
     </head>
     <body>
         <div id="form">
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('tryConnect') }}">
+                @csrf
                 <div class="card">
                     <div class="card-header">
                         <h2>Connexion</h2>

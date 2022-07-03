@@ -56,13 +56,61 @@ label {
     border: 1px solid #ced4da !important;
 }
 
-#accountRegister {
+#accountRegister, #PersonneRegister, #error, #success {
     display: none;
 }
 
 #btn_logo_upload {
     width: 150px;
 }
-/*@media all {*/
-/*    */
-/*}*/
+
+#previewLogo {
+    width: 200px;
+}
+
+#error, #succes {
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    z-index: 999999;
+}
+
+
+@media (max-width: 1117px) {
+    #form{
+        width: 40vw;
+        height: auto;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+    }
+}
+
+@media (max-width: 835px) {
+    #form{
+        width: 50vw;
+        height: auto;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+    }
+}
+
+@media (max-width: 668px) {
+    #form{
+        width: 80vw;
+        height: auto;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+    }
+}
