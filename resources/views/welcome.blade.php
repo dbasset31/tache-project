@@ -4,13 +4,13 @@
         <div class="flex-column">
             <div class="d-flex flex-row mt-2 mb-4 justify-content-between align-items-center">
                 <div>
-                    <img id="business-logo" src="{{ asset("/vendor/img/default-logo.svg") }}" alt="business-logo">
+                    <img id="business-logo" src="{{ Auth::user()->companie->logo }}" alt="business-logo">
                 </div>
                 <div>
-                    Nom de l'entreprise
+                    {{ Auth::user()->companie->name }}
                 </div>
                 <div class="d-flex align-items-center">
-                    1
+                    {{ $online }}
                     <span class="ms-1 me-1">/</span>
                     100
                 </div>
