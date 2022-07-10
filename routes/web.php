@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::middleware(['auth','update_activite'])->group(function() {
+    //Home
     Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    //Tasks
+    Route::get('task_Create',[TaskController::class,'form'])->name('formTask');
+    Route::post('task_Create',[TaskController::class,'store'])->name('saveTask');
+    Route::get('get_tasks_by_companie',[TaskController::class,'get'])->name('getAllTaskByCompanie');
 });
 
 Route::middleware('guest')->group(function() {

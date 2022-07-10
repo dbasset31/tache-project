@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('tasks', function(Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('statut_id')->references('id')->on('statutes');
+            $table->foreign('statut_id')->references('id')->on('statuts');
             $table->foreign('priority_id')->references('id')->on('priorities');
         });
     }

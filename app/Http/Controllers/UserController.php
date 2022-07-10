@@ -71,7 +71,7 @@ class UserController extends Controller
         $companie->created_at = $user->created_at;
 
         $companie->save();
-
+        $user->companie_id = $companie->id;
 //        $mail = new \App\Mail\register($user->token, $user->pseudo);
 //        $mailjet = Mailjet::getClient();
 //        $response = $mailjet->get(Resources::$Contact);

@@ -166,7 +166,7 @@ INSERT INTO `migrations` VALUES (8, '2022_07_02_164257_create_options', 1);
 INSERT INTO `migrations` VALUES (9, '2022_07_02_164414_create_companies_options', 1);
 INSERT INTO `migrations` VALUES (10, '2022_07_02_172004_create_tasks', 1);
 INSERT INTO `migrations` VALUES (11, '2022_07_02_172459_create_priorities', 1);
-INSERT INTO `migrations` VALUES (12, '2022_07_02_172538_create_statutes', 1);
+INSERT INTO `migrations` VALUES (12, '2022_07_02_172538_create_statuts', 1);
 INSERT INTO `migrations` VALUES (13, '2022_07_02_172638_create_logs_mails', 1);
 INSERT INTO `migrations` VALUES (14, '2022_07_02_173459_create_invitations', 1);
 INSERT INTO `migrations` VALUES (15, '2022_07_02_174914_update_companies', 1);
@@ -271,10 +271,10 @@ CREATE TABLE `priorities`  (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for statutes
+-- Table structure for statuts
 -- ----------------------------
-DROP TABLE IF EXISTS `statutes`;
-CREATE TABLE `statutes`  (
+DROP TABLE IF EXISTS `statuts`;
+CREATE TABLE `statuts`  (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -283,7 +283,7 @@ CREATE TABLE `statutes`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of statutes
+-- Records of statuts
 -- ----------------------------
 
 -- ----------------------------
@@ -305,7 +305,7 @@ CREATE TABLE `tasks`  (
   INDEX `tasks_statut_id_foreign`(`statut_id`) USING BTREE,
   INDEX `tasks_priority_id_foreign`(`priority_id`) USING BTREE,
   CONSTRAINT `tasks_priority_id_foreign` FOREIGN KEY (`priority_id`) REFERENCES `priorities` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `tasks_statut_id_foreign` FOREIGN KEY (`statut_id`) REFERENCES `statutes` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `tasks_statut_id_foreign` FOREIGN KEY (`statut_id`) REFERENCES `statuts` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tasks_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 

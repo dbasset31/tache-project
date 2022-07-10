@@ -1,6 +1,8 @@
 $(function (){
-    $('input,select').each(function (){
+    $('input,select,textarea').each(function (){
+        console.log($(this))
         if($(this).attr('requis') == "true"){
+            console.log('requis')
             if($("label[for='"+$(this).attr('id')+"']").html() !== undefined){
                 $("label[for='"+$(this).attr('id')+"']").html($("label[for='"+$(this).attr('id')+"']").html()+ " *");
             }
@@ -12,7 +14,7 @@ function validateForm(id){
     $("#error").html('');
     let fail = "";
     let error = $('#error').html();
-    $('input,select').each(function (){
+    $('input,select,textarea').each(function (){
         if($(this).attr('requis') == "true" && $(this).val() == ""){
             $(this).css('border-color','red');
             fail = true
@@ -25,8 +27,11 @@ function validateForm(id){
     })
 
     if(fail != true){
+        $('#error').css('display','none');
         $('#'+id).submit();
+    } else {
+        $('#error').html('Les champs suivant sont requis : <br><br>'+error).show();
     }
-    $('#error').html('Les champs suivant sont requis : <br><br>'+error).show();
+
 
 }

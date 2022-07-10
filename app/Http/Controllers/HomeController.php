@@ -21,6 +21,10 @@ class HomeController extends Controller
                                             ->join('companies','users.id','companies.user_id')
                                             ->get();
         $nbOnline = $nbOnline->count();
-        return view('welcome',['online' => $nbOnline]);
+        $nbTotal = DB::table('users')->where('companie_id',Auth::user()->companie->id);
+        $nbTotal = $nbTotal->count();
+        return view('welcome',['online' => $nbOnline,'total' => $nbTotal]);
     }
+
+
 }

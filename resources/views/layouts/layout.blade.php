@@ -8,6 +8,7 @@
         <script src="{{ asset("/vendor/js/jquery/jquery.js") }}"></script>
         <script src="{{ asset("/vendor/js/bootstrap/bootstrap.bundle.min.js") }}"></script>
         <script src="{{asset('vendor/js/modal.js')}}"></script>
+        @yield('scripts')
         <link href="{{ asset("/vendor/css/bootstrap/bootstrap.min.css") }}" rel="stylesheet">
         <link href="{{ asset("/vendor/fa/css/fontawesome.css") }}" rel="stylesheet">
         <link href="{{ asset("/vendor/fa/css/all.css")}}" rel="stylesheet">

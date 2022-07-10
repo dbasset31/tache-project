@@ -52,7 +52,7 @@ class User extends Authenticatable
         return $this->hasOne(Team::class);
     }
 
-    public function tasks()
+    public function task()
     {
         return $this->hasMany(Task::class);
     }
@@ -60,5 +60,10 @@ class User extends Authenticatable
     public function civility()
     {
         return $this->belongsTo(Civility::class);
+    }
+
+    public function companie_user()
+    {
+        return $this->belongsTo(Companie::class);
     }
 }

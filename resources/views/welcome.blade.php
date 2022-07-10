@@ -1,4 +1,7 @@
 @extends('layouts/layout')
+@section('scripts')
+    <script src="{{ asset('/vendor/js/task.js') }}"></script>
+@endsection
 @section('page')
     <div class="d-flex justify-content-center">
         <div class="flex-column">
@@ -12,7 +15,7 @@
                 <div class="d-flex align-items-center">
                     {{ $online }}
                     <span class="ms-1 me-1">/</span>
-                    100
+                    {{ $total }}
                 </div>
             </div>
             <div>
@@ -26,12 +29,12 @@
                         <th>Actions</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="bodyTasks">
 
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="5" class="text-center"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i> Ajouter une tache</button></td>
+                        <td colspan="5" class="text-center"><button onclick="openModal('{{ route('formTask') }}','GET')" type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i> Ajouter une tache</button></td>
                     </tr>
                     </tfoot>
                 </table>
