@@ -19,6 +19,7 @@ class UpdateActive
     {
         Auth::user()->date_activite = date('Y-m-d H:i:s');
         Auth::user()->save();
+
         return $next($request);
     }
 }

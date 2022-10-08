@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('invitations', function(Blueprint $table) {
+        Schema::table('invitations', function (Blueprint $table) {
             $table->foreign('team_id')->references('id')->on('teams');
         });
     }
@@ -25,6 +25,5 @@ return new class extends Migration
      */
     public function down()
     {
-
     }
 };

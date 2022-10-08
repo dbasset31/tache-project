@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('tasks', function(Blueprint $table) {
+        Schema::table('tasks', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('statut_id')->references('id')->on('statuts');
             $table->foreign('priority_id')->references('id')->on('priorities');
@@ -27,6 +27,5 @@ return new class extends Migration
      */
     public function down()
     {
-
     }
 };

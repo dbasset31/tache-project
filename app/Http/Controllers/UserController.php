@@ -17,13 +17,12 @@ class UserController extends Controller
     {
         $packages = Package::all();
         $civilites = Civility::all();
-        return view('users/register',['civilities' => $civilites, 'packages' => $packages]);
+
+        return view('users/register', ['civilities' => $civilites, 'packages' => $packages]);
     }
 
     public function saveRegister(Request $request)
     {
-
-
         $request->validate([
             'email' => 'required|max:255|email|unique:users,email',
             'businessName' => 'required|max:20|unique:companies,name',
@@ -36,42 +35,43 @@ class UserController extends Controller
             'lastName' => 'required|alpha',
             'firstName' => 'required|alpha',
             'color' => 'required',
-            'businessLogo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg'
+            'businessLogo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         $user = new User();
-        $user->lastname = $request->input('lastName');
-        $user->firstname = $request->input('firstName');
-        $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
-        $user->color = $request->input('color');
+        $user->lastname = $request->lastName;
+        $user->firstname = $request->firstName;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->color = $request->color;
         $user->active = 1;
         $user->remember_token = \Illuminate\Support\Str::random(32);
-        $user->civility_id = $request->input('civilite_id');
-        $user->quality = $request->input('qualite');
-        $user->tel = $request->input('telDirect');
+        $user->civility_id = $request->civilite_id;
+        $user->quality = $request->qualite;
+        $user->tel = $request->tel;
         $user->created_at = date('Y-m-d H:i:s');
         $user->save();
 
         $companie = new Companie();
-        $companie->name = $request->input("businessName");
-        if($request->file('businessLogo') == null){
+        $companie->name = $request->businessName;
+        if ($request->file('businessLogo') == null) {
             $companie->logo = 'img/default-logo.svg';
         } else {
             $time = time();
             $companie->logo = 'img/'.$user->id.'/avatar/'.$time.'.'.$request->businessLogo->extension();
-            if(!is_dir(public_path('img/'.$user->id.'/avatar'))){
-                mkdir(public_path('img/'.$user->id.'/avatar'),0777,true);
+            if (! is_dir(public_path('img/'.$user->id.'/avatar'))) {
+                mkdir(public_path('img/'.$user->id.'/avatar'), 0777, true);
             }
-            $request->businessLogo->move(public_path('img/'.$user->id.'/avatar/'),$time.'.'.$request->businessLogo->extension());
+            $request->businessLogo->move(public_path('img/'.$user->id.'/avatar/'), $time.'.'.$request->businessLogo->extension());
         }
         $companie->user_id = $user->id;
-        $companie->package_id = $request->input('package_id');
-        $companie->tel = $request->input('telBusiness');
+        $companie->package_id = $request->package_id;
+        $companie->tel = $request->telBusiness;
         $companie->created_at = $user->created_at;
 
         $companie->save();
         $user->companie_id = $companie->id;
+        $user->update();
 //        $mail = new \App\Mail\register($user->token, $user->pseudo);
 //        $mailjet = Mailjet::getClient();
 //        $response = $mailjet->get(Resources::$Contact);
@@ -90,9 +90,9 @@ class UserController extends Controller
 //            $response = $mailjet->post(Resources::$Email, ['body' => $body]);
 //            if($response->success()){
 
+        session()->flash('success', 'Veuillez confirmez votre adresse e-mail avant de pouvoir vous connecter.');
 
-                session()->flash('success', 'Veuillez confirmez votre adresse e-mail avant de pouvoir vous connecter.');
-                return redirect()->to('/connexion');
+        return redirect()->to('/connexion');
 //            } else {
 //                session()->flash('error', 'Échec de la création du compte. Veuillez réessayer.');
 //                return redirect()->to('/inscription');
@@ -118,13 +118,24 @@ class UserController extends Controller
 //                    'email' => "L'adresse email n'est pas confirmée."
 //                ]);
 //            } else {
-                $request->session()->regenerate();
-                return redirect('/');
+            $token = md5(uniqid());
+            User::where('id', Auth::id())->update(['token' => $token]);
+
+            $request->session()->regenerate();
+
+            return redirect('/');
 //            }
         }
 
         return back()->withErrors([
-            'email' => "Email ou mot de passe invalide"
+            'email' => 'Email ou mot de passe invalide',
         ]);
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+
+        return redirect('/');
     }
 }

@@ -1,18 +1,18 @@
-function openModal(url,method){
+function openModal(url, method) {
     $.ajax({
-        type:method,
-        url:url,
+        type: method,
+        url: url,
     })
-        .done(function( html ) {
+        .done(function (html) {
             $('#modal').append(html);
             $("#modalbox").modal('show');
         })
-        .fail(function ( msg ){
+        .fail(function (msg) {
             console.log(msg);
         });
 }
 
-function closeModal(){
+function closeModal() {
     $('#modal').html('');
 }
 
