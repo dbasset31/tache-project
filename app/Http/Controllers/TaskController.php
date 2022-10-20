@@ -6,14 +6,14 @@ use App\Models\Priority;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
     public function form()
     {
-       $priorities = Priority::all();
-       return view('ajax/tasks/create',['priorities' => $priorities]);
+        $priorities = Priority::all();
+
+        return view('ajax/tasks/create', ['priorities' => $priorities]);
     }
 
     public function store(Request $request)
@@ -22,7 +22,7 @@ class TaskController extends Controller
             'title' => 'required|max:255',
             'description' => 'required|max:255',
             'priority_id' => 'required|exists:priorities,id',
-            'deadline' => 'nullable|date'
+            'deadline' => 'nullable|date',
         ]);
 
         $task = new Task();
@@ -40,7 +40,18 @@ class TaskController extends Controller
 
     public function get()
     {
-        $tasks = Task::where('companie_id',Auth::user()->companie_id)->get();
-        return view('ajax/tasks/getTask',['tasks'=> $tasks]);
+        $tasks = Task::where('companie_id', Auth::user()->companie_id)->get();
+
+        return view('ajax/tasks/getTask', ['tasks' => $tasks]);
+    }
+
+    public function delete(Request $request)
+    {
+        if (Task::where('id', $request->id)->where('companie_id', Auth::user()->companie->id)->count() > 0) {
+            Task::destroy($request->id);
+        } else {
+            abort(403);
+        }
+//
     }
 }

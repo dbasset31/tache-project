@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('companies_options', function(Blueprint $table) {
+        Schema::table('companies_options', function (Blueprint $table) {
             $table->foreign('companie_id')->references('id')->on('companies');
             $table->foreign('option_id')->references('id')->on('options');
         });

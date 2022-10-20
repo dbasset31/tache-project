@@ -9,9 +9,11 @@ class Companie extends Model
 {
     use HasFactory;
 
+    protected $table = 'companies';
+
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(User::class);
     }
 
     public function companies_option()

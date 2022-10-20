@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -44,7 +43,7 @@ class User extends Authenticatable
 
     public function companie()
     {
-        return $this->hasOne(Companie::class);
+        return $this->belongsTo(Companie::class, 'companie_id', 'id');
     }
 
     public function team()
@@ -60,10 +59,5 @@ class User extends Authenticatable
     public function civility()
     {
         return $this->belongsTo(Civility::class);
-    }
-
-    public function companie_user()
-    {
-        return $this->belongsTo(Companie::class);
     }
 }

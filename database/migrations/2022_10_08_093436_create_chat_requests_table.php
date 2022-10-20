@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('companies', function (Blueprint $table) {
-            $table->string('tel');
+        Schema::create('chat_requests', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('from_user_id');
+            $table->unsignedBigInteger('to_user_id');
+            $table->enum('status', ['Pending', 'Approve', 'Reject']);
+            $table->timestamps();
         });
     }
 
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('chat_requests');
     }
 };
