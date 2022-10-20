@@ -101,23 +101,18 @@ class SocketController extends Controller implements MessageComponentInterface
                             if ($client->resourceId == $receiver_connection_id[0]->connection_id) {
                                 Chat::where('id', $chat_message_id)->update(['message_status' => 'Send']);
                                 $send_data['message_status'] = 'Send';
-                                $send_data['messsage_read'] = true;
+                                $send_data['messsage_send'] = true;
                                 $send_data['sender_connection_id'] = $sender_connection_id[0]->connection_id;
                             } else {
                                 $send_data['message_status'] = 'Not Send';
-                            }
-                            if ($client->resourceId == $sender_connection_id[0]->connection_id) {
-                                $send_data['update_message_status'] = true;
-                                $send_data['message_status'] = 'Read';
                             }
                             $client->send(json_encode($send_data));
                         }
                     }
                 break;
                 case "update_chat_status":
-
                     Chat::where('id', $data->chat_message_id)->update(['message_status' => $data->chat_message_status]);
-                    $sender_connection_id = User::select('connection_id')->where('id', $data->from_user_id)->get();
+                    $sender_connection_id = User::select('connection_id')->where('id', $data->to_user_id)->get();
                     foreach ($this->clients as $client) {
                         if ($client->resourceId == $sender_connection_id[0]->connection_id) {
                             $send_data['update_message_status'] = $data->chat_message_status;

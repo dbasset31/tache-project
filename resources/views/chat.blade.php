@@ -190,6 +190,8 @@
 				</div>
 				`;
                     update_message_status(data.chat_message_id, from_user_id, to_user_id, 'Read');
+                } else {
+                    update_message_status(data.chat_message_id, from_user_id, to_user_id, 'Send');
                 }
             }
 
@@ -199,10 +201,6 @@
                 chat_history_element.innerHTML = previous_chat_element.innerHTML + html;
             }
             scroll_top();
-        }
-
-        if(data.messsage_read){
-            console.log(data);
         }
 
         if (data.chat_history) {
@@ -244,7 +242,7 @@
             scroll_top();
         }
 
-        if (data.update_message_status) {
+        if (data.update_message_status != "") {
             if(from_user_id == data.to_user_id){
                 var chat_status_element = document.querySelector('#chat_status_' + data.chat_message_id + '');
                 if (chat_status_element) {
@@ -260,6 +258,10 @@
 
         if (data.make_connect) {
             $('#statut_' + data.connection_id).html("<img src=\"{{ asset('vendor/img/online.png') }}\">")
+        }
+
+        if(data.update_message_status_change){
+            $('#chat_status_'+data.chat_message_id).addClass('text-primary').html('<i class="fas fa-check-double"></i>');
         }
     };
 
@@ -303,8 +305,6 @@
             type: 'request_connected_chat_user'
         };
         conn.send(JSON.stringify(data));
-        console.log(data);
-        console.log(to_user_id);
         if (to_user_id == "") {
             $('#discussion').hide();
         }
@@ -345,8 +345,6 @@
         conn.send(JSON.stringify(data));
         document.querySelector('#message_area').value = '';
         document.querySelector('#send_button').disabled = false;
-        console.log(data);
-
     }
 
     function load_chat_data(from_user_id, to_user_id) {
