@@ -1,8 +1,6 @@
 $(function (){
     $('input,select,textarea').each(function (){
-        console.log($(this))
         if($(this).attr('requis') == "true"){
-            console.log('requis')
             if($("label[for='"+$(this).attr('id')+"']").html() !== undefined){
                 $("label[for='"+$(this).attr('id')+"']").html($("label[for='"+$(this).attr('id')+"']").html()+ " *");
             }

@@ -119,7 +119,6 @@ function nextStep(etape,nextEtape){
 
 function prevStep(prevEtape,curEtap){
     $("#"+curEtap).fadeOut(500);
-    console.log(prevEtape);
     setTimeout(function (){
         $('#'+prevEtape).show();
         $('#'+prevEtape).fadeIn(500);
