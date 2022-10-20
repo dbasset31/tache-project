@@ -48,7 +48,7 @@ class UserController extends Controller
         $user->remember_token = \Illuminate\Support\Str::random(32);
         $user->civility_id = $request->civilite_id;
         $user->quality = $request->qualite;
-        $user->tel = $request->tel;
+        $user->tel = $request->telDirect;
         $user->created_at = date('Y-m-d H:i:s');
         $user->save();
 
