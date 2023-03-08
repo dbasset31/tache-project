@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('color');
             $table->unsignedBigInteger('team_id')->nullable();
-            $table->unsignedBigInteger('companie_id');
+            $table->unsignedBigInteger('companie_id')->nullable();
             $table->dateTime('date_activite')->nullable();
             $table->boolean('active')->default(0);
             $table->rememberToken();

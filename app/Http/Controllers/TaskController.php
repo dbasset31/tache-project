@@ -41,7 +41,6 @@ class TaskController extends Controller
     public function get()
     {
         $tasks = Task::where('companie_id', Auth::user()->companie_id)->get();
-
         return view('ajax/tasks/getTask', ['tasks' => $tasks]);
     }
 
