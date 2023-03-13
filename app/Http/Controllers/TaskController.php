@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Priority;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,11 +13,12 @@ class TaskController extends Controller
     public function form($id = null)
     {
         $priorities = Priority::all();
+        $users = User::where('companie_id', Auth::user()->companie->id)->get();
         $task = null;
         if ($id != null) {
             $task = Task::where('id', $id)->first();
         }
-        return view('ajax/tasks/create', ['priorities' => $priorities, 'task' => $task]);
+        return view('ajax/tasks/create', ['priorities' => $priorities, 'task' => $task, 'users' => $users ]);
     }
 
     public function store(Request $request,$id = null)

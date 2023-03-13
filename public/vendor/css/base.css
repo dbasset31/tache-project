@@ -132,3 +132,7 @@ i {
 .state_user {
     width: 12px;
 }
+
+.ck-editor {
+    border: 2px solid grey !important;
+}

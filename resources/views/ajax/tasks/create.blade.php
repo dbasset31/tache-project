@@ -5,7 +5,6 @@
     @endphp
 @endif
 @section('modal-header')
-
     <h3>@if(isset($task->id))Modifier une tâche @else Créer une tâche @endif</h3>
 @endsection
 @section('modal-body')
@@ -13,9 +12,15 @@
         @csrf
         <label for="title">Titre de la tâche</label>
         <input requis="true" class="form-control" type="text" id="title" name="title" value="{{$task->title}}">
-        <label class="mt-2" for="description">Description</label>
-        <textarea class="form-control" name="description" id="description">{{$task->description}}</textarea>
-        <label class="mt-2" for="priority_id">Priorité</label>
+        <label class="mt-3" for="description">Description</label>
+        <textarea style="border: 2px solid gray" class="form-control" name="description" id="description">{{$task->description}}</textarea>
+        <label class="mt-3" for="user_id">Attribué à </label>
+        <select class="form-control" requis="true" id="user_id" name="user_id">
+            @foreach($users as $user)
+                <option value="{{ $user->id }}" @if($task->user_id == $user->id) selected @endif>{{ $user->firstname.' '.$user->lastname }}</option>
+            @endforeach
+        </select>
+        <label class="mt-3" for="priority_id">Priorité</label>
         <select class="form-control" requis="true" id="priority_id" name="priority_id">
             @foreach($priorities as $priority)
                 <option value="{{ $priority->id }}" @if($task->priority_id == $priority->id) selected @endif>{{ $priority->name }}</option>

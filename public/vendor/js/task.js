@@ -28,12 +28,12 @@ function deleteTask(taskId) {
             },
             data: {id: taskId},
         })
-            .done(function (html) {
-                $('#task_' + taskId).remove();
-            })
-            .fail(function (msg) {
-                alert('Echec de la suppression de la tâche. Veuillez réessayer ultèrieurement.')
-            });
+        .done(function (html) {
+            $('#task_' + taskId).remove();
+        })
+        .fail(function (msg) {
+            alert('Echec de la suppression de la tâche. Veuillez réessayer ultèrieurement.')
+        });
     }
 }
 
@@ -47,11 +47,11 @@ function archiveTask(taskId) {
             },
             data: {id: taskId},
         })
-            .done(function (html) {
-                $('#task_' + taskId).remove();
-            })
-            .fail(function (msg) {
-                alert('Echec d\'archivage de la tâche. Veuillez réessayer ultèrieurement.')
-            });
+        .done(function (html) {
+            $('#task_' + taskId).remove();
+        })
+        .fail(function (msg) {
+            alert('Echec d\'archivage de la tâche. Veuillez réessayer ultèrieurement.')
+        });
     }
 }
