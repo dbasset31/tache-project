@@ -1,10 +1,8 @@
 $(function () {
     getAllByCompanie();
     $('#deadline').datepicker({
-        // showOn: "both",
-        dateFormat: 'yy-m-d',
-        showAnim: "clip"
-    })
+        dateFormat: 'dd/mm/yy'
+    });
 })
 
 function getAllByCompanie() {
@@ -39,3 +37,21 @@ function deleteTask(taskId) {
     }
 }
 
+function archiveTask(taskId) {
+    if (confirm("Êtes-vous sûr de vouloir archiver la tâche \"" + ($('#tache_libelle_' + taskId).html().replaceAll(' ', '').replaceAll('\n', '')) + "\" ?")) {
+        $.ajax({
+            type: 'POST',
+            url: '/archive_task',
+            headers: {
+                'X-CSRF-TOKEN': $('#csrf').html()
+            },
+            data: {id: taskId},
+        })
+            .done(function (html) {
+                $('#task_' + taskId).remove();
+            })
+            .fail(function (msg) {
+                alert('Echec d\'archivage de la tâche. Veuillez réessayer ultèrieurement.')
+            });
+    }
+}

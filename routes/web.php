@@ -24,10 +24,11 @@ Route::middleware(['auth', 'update_activite'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     //Tasks
-    Route::get('task_Create', [TaskController::class, 'form'])->name('formTask');
-    Route::post('task_Create', [TaskController::class, 'store'])->name('saveTask');
+    Route::get('task_Create/{id?}', [TaskController::class, 'form'])->name('formTask');
+    Route::post('task_Create/{id?}', [TaskController::class, 'store'])->name('saveTask');
     Route::get('get_tasks_by_companie', [TaskController::class, 'get'])->name('getAllTaskByCompanie');
     Route::delete('delete_task', [TaskController::class, 'delete'])->name('deleteTask');
+    Route::post('archive_task', [TaskController::class, 'archive'])->name('archiveTask');
 
     //Teams
     Route::get('teams', [TeamController::class, 'list'])->name('allTeams');

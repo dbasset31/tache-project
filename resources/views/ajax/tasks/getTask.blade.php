@@ -7,7 +7,7 @@
                     {{ $task->title }}
                 </div>
                 <div>
-                    <i class="fa-1x fa-solid fa-magnifying-glass"></i>
+                    <i class="fa-1x fa-solid fa-magnifying-glass" onclick="openModal('{{ route('formTask') }}/{{ $task->id }}','GET')"></i>
                 </div>
             </div>
         </td>
@@ -16,7 +16,7 @@
         <td id="td-action">
             <div class="d-flex justify-content-between">
                 <div>
-                    <i id="box-icon" class="fa fa-box"></i>
+                    <i id="box-icon" class="fa fa-box" onclick="archiveTask({{ $task->id }})"></i>
                 </div>
                 <div>
                     <i id="trash-icon" onclick="deleteTask({{ $task->id }})" class="fa fa-trash"></i>

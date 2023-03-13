@@ -44,7 +44,16 @@
         @yield('page')
     </div>
 </div>
-<div id="error" class="alert alert-danger" role="alert"></div>
+<div id="error" class="alert alert-danger" role="alert">
+    @if($errors->any())
+        <script>
+            $('#error').show();
+        </script>
+        @foreach($errors->all() as $error)
+            {{ $error }}<br>
+        @endforeach
+    @endif
+</div>
 <div id="success" class="alert alert-success" role="alert"></div>
 <div id="modal"></div>
 </body>
