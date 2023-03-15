@@ -21,6 +21,8 @@ class UserController extends Controller
         return view('users/register', ['civilities' => $civilites, 'packages' => $packages]);
     }
 
+
+
     public function saveRegister(Request $request)
     {
         $request->validate([
@@ -138,4 +140,6 @@ class UserController extends Controller
 
         return redirect('/');
     }
+
+
 }

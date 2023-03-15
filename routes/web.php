@@ -32,6 +32,9 @@ Route::middleware(['auth', 'update_activite'])->group(function () {
 
     //Teams
     Route::get('teams', [TeamController::class, 'list'])->name('allTeams');
+    Route::get('team_Create/{id?}', [TeamController::class, 'create'])->name('formTeam');
+    Route::post('team_Create/{id?}', [TeamController::class, 'store'])->name('saveTeam');
+    Route::delete('delete_team', [TeamController::class, 'delete'])->name('deleteTeam');
 });
 
 Route::middleware('guest')->group(function () {

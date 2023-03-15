@@ -1,7 +1,7 @@
 @extends('layouts/layout')
 
 @section('page')
-
+<div>
     <div class="row">
         <div class="col-sm-4 col-lg-3">
             <div class="card">
@@ -28,6 +28,8 @@
 
         </div>
     </div>
+</div>
+
 
     <style>
 

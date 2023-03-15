@@ -11,21 +11,6 @@
     </script>
 @endsection
 @section('page')
-    <div class="d-flex justify-content-center">
-        <div class="flex-column">
-            <div class="d-flex flex-row mt-2 mb-4 justify-content-between align-items-center">
-                <div>
-                    <img id="business-logo" src="{{ Auth::user()->companie->logo }}" alt="business-logo">
-                </div>
-                <div>
-                    {{ Auth::user()->companie->name }}
-                </div>
-                <div class="d-flex align-items-center">
-                    {{ $online }}
-                    <span class="ms-1 me-1">/</span>
-                    {{ $total }}
-                </div>
-            </div>
             <div>
                 <table class="table table-responsive table-bordered">
                     <thead>
@@ -51,7 +36,6 @@
                     </tfoot>
                 </table>
             </div>
-        </div>
-    </div>
+
     <div class="d-none" id="csrf"></div>
 @endsection

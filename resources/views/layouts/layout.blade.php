@@ -1,3 +1,16 @@
+@php
+
+    $date = date('Y-m-d H:i:s');
+        $time = \Carbon\Carbon::parse($date);
+        $endTime = $time->addMinutes(2);
+        $nbOnline = Illuminate\Support\Facades\DB::table('users')->where('date_activite', '>=', $date)
+                                            ->where('date_activite', '<=', $endTime)
+                                            ->where('companies.user_id', '=', Auth::user()->id)
+                                            ->join('companies', 'users.id', 'companies.user_id')
+                                            ->count();
+        $nbTotal = Illuminate\Support\Facades\DB::table('users')->where('companie_id', Auth::user()->companie->id);
+        $nbTotal = $nbTotal->count();
+@endphp
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,6 +23,7 @@
     <script src="{{ asset("/vendor/js/bootstrap/bootstrap.bundle.min.js") }}"></script>
     <script src="{{asset('vendor/js/modal.js')}}"></script>
     <script src="{{asset('vendor/js/base.js')}}"></script>
+    <script src="https://cdn.tiny.cloud/1/8p21jerx1wzoww973mfhhm9inyne23jh224fsuebabblhizq/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     @yield('scripts')
     <link href="{{ asset("/vendor/css/bootstrap/bootstrap.min.css") }}" rel="stylesheet">
     <link href="{{ asset("/vendor/css/jquery-ui.min.css") }}" rel="stylesheet">
@@ -41,7 +55,24 @@
         </div>
     </div>
     <div class="w-100">
-        @yield('page')
+        <div class="d-flex justify-content-center">
+            <div class="flex-column w-100">
+                <div class="d-flex flex-row mt-2 mb-4 justify-content-between align-items-center">
+                    <div>
+                        <img id="business-logo" src="{{ Auth::user()->companie->logo }}" alt="business-logo">
+                    </div>
+                    <div>
+                        {{ Auth::user()->companie->name }}
+                    </div>
+                    <div class="d-flex align-items-center">
+                        {{ $nbOnline }}
+                        <span class="ms-1 me-1">/</span>
+                        {{ $nbTotal }}
+                    </div>
+                </div>
+                @yield('page')
+            </div>
+        </div>
     </div>
 </div>
 <div id="error" class="alert alert-danger" role="alert">

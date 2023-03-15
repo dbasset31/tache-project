@@ -13,7 +13,7 @@
         <label for="title">Titre de la tâche</label>
         <input requis="true" class="form-control" type="text" id="title" name="title" value="{{$task->title}}">
         <label class="mt-3" for="description">Description</label>
-        <textarea style="border: 2px solid gray" class="form-control" name="description" id="description">{{$task->description}}</textarea>
+        <textarea style="border: 2px solid gray" class="description" name="description" id="description">{{$task->description}}</textarea>
         <label class="mt-3" for="user_id">Attribué à </label>
         <select class="form-control" requis="true" id="user_id" name="user_id">
             @foreach($users as $user)
@@ -34,15 +34,20 @@
     <button type="button" onclick="validateForm('saveTask')" class="btn btn-success">Enregistrer</button>
     <script src="{{ asset('/vendor/js/form.js') }}"></script>
     <script src="{{ asset('/vendor/js/task.js') }}"></script>
-    <script src="{{ asset('/vendor/js/ckeditor/ckeditor.js') }}"></script>
     <script>
-        $(function () {
-            ClassicEditor
-                .create( document.querySelector( '#description' ) )
-                .catch( error => {
-                    console.error( error );
-                } );
-        })
+        $(document).ready(function() {
+            tinymce.init({
+                selector: 'textarea',
+                plugins: 'anchor autolink autoresize charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'Author name',
+                mergetags_list: [
+                    { value: 'First.Name', title: 'First Name' },
+                    { value: 'Email', title: 'Email' },
+                ]
+            });
+        });
     </script>
 @endsection
 
